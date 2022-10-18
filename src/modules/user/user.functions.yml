@@ -20,5 +20,5 @@ updateUserById:
   handler: src/modules/user/handler.updateUserHandler
   events:
     - http:
-        path: updateUser
+        path: updateUser/{userId}
         method: PATCH

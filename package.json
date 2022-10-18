@@ -1,4 +1,9 @@
 {
+  "name": "aws-serverless",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Bogdan",
+	"license": "UNLICENSED",
   "scripts": {
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "local": "serverless offline",
