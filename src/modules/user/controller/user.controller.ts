@@ -1,4 +1,5 @@
 import { loadSequelize } from "@shared/sequelize/sequelize";
+import { MessageUtil } from "@shared/utils/types/message";
 import { UserService } from "../service/user.service";
 
 module.exports.createUserHandler = async (event) => {
@@ -9,8 +10,12 @@ module.exports.createUserHandler = async (event) => {
             name: body.name,
             lastName: body.lastName,
           };
+try {
   const result = await UserService.create(data);
-  return JSON.stringify(result);
+  return MessageUtil.success(result);
+  } catch (e) {
+    return MessageUtil.error(500, e);
+  }
 }
 
 module.exports.getUserByIdHandler = async (event) => {
@@ -18,11 +23,11 @@ module.exports.getUserByIdHandler = async (event) => {
   const userId = event?.pathParameters?.userId;
   
   if (!userId) {
-    return console.log ('user not found');
+    return MessageUtil.error(404, 'user not found');
   }
   const user = await UserService.getUserById(userId);
   
-  return JSON.stringify(user);
+  return MessageUtil.success(user);
 }
 
 module.exports.deleteUserHandler = async (event) => {
@@ -36,7 +41,7 @@ module.exports.deleteUserHandler = async (event) => {
 
   const result = await UserService.deleteUser(id);
 
-  return JSON.stringify(result);
+  return MessageUtil.success({ delete: result });
 }
 
 module.exports.updateUserHandler = async(event) => {
@@ -55,5 +60,5 @@ module.exports.updateUserHandler = async(event) => {
 
   const result = await UserService.update(data);
 
-  return JSON.stringify(result);
+  return MessageUtil.success(result);
 }
