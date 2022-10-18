@@ -1,0 +1,29 @@
+service: aws
+useDotenv: true
+custom:
+  defaultStage: default
+  environment: ${file(./env.yml):${self:provider.stage}, file(./env.yml):default}
+  paths: 
+    shared: ./src/shared
+    user: ./src/modules/user
+  esbuild:
+    external:
+      - 'pg'
+    packager: yarn
+    bundle: true
+    minify: false
+
+provider:
+  name: aws
+  stage: dev
+ 
+  runtime: nodejs16.x
+  endpointType: REGIONAL
+plugins:
+  - serverless-offline
+  - serverless-esbuild
+  - serverless-dotenv-plugin
+ 
+functions: 
+  - ${file(src/modules/user/user.functions.yml)}
+

@@ -1,0 +1,24 @@
+createUser:
+  handler: src/modules/user/handler.createUserHandler
+  events:
+    - http:
+        path: user
+        method: POST
+getUserById:
+  handler: src/modules/user/handler.getUserByIdHandler
+  events:
+    - http:
+        path: getUser/{userId}
+        method: GET
+deleteUserById:
+  handler: src/modules/user/handler.deleteUserHandler
+  events:
+    - http:
+        path: deleteUser
+        method: DELETE
+updateUserById:
+  handler: src/modules/user/handler.updateUserHandler
+  events:
+    - http:
+        path: updateUser
+        method: PATCH

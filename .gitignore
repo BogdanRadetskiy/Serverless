@@ -1,0 +1,15 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+.esbuild
+# compiled output
+/dist
+/tmp
+/out-tsc
+/build
+/public/img
+
+# dependencies
+/node_modules
+
+# dotenv environment variables file
+.env
+env.yml
