@@ -22,11 +22,10 @@ module.exports.getUserByIdHandler = async (event) => {
   await loadSequelize();
   const userId = event?.pathParameters?.userId;
   
-  if (!userId) {
+  const user = await UserService.getUserById(userId);
+  if (!user) {
     return MessageUtil.error(404, 'user not found');
   }
-  const user = await UserService.getUserById(userId);
-  
   return MessageUtil.success(user);
 }
 
