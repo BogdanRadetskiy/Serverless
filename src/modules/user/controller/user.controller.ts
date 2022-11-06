@@ -14,7 +14,7 @@ try {
   const result = await UserService.create(data);
   return MessageUtil.success(result);
   } catch (e) {
-    return MessageUtil.error(500, e);
+       return MessageUtil.error(500, e);
   }
 }
 
